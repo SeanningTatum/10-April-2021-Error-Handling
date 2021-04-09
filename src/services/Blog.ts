@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import axios from '../utils/axiosInstance';
 import env from '~/config/env';
 import type { Blog } from '~/models/Blog';
 import type { Response } from '~/types/Response';

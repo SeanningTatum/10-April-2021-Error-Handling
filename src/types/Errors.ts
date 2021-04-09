@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 export class ServerError extends Error {
   constructor() {
     super('A server error has occurred');
@@ -24,5 +25,36 @@ export class NotFoundError extends Error {
     this.name = 'NotFoundError';
   }
 }
+
+export class InsufficientFundsError extends Error {
+  constructor() {
+    super(`You don't have enough money brah!`);
+    this.name = 'PayPay InsufficientFunds';
+  }
+}
+
+export class InvalidCardError extends Error {
+  constructor() {
+    super(`You don't have enough money brah!`);
+    this.name = 'PayPay InsufficientFunds';
+  }
+}
+
+export class RestrictedRegionError extends Error {
+  constructor() {
+    super(`You don't have enough money brah!`);
+    this.name = 'PayPay InsufficientFunds';
+  }
+
+  listValidCountries(): string {
+    return 'hi';
+  }
+}
+
+export type PayPalErrors =
+  | InsufficientFundsError
+  | InvalidCardError
+  | RestrictedRegionError
+  | any;
 
 export type AllErrors = ServerError | NotAuthorizedError | NotFoundError;
