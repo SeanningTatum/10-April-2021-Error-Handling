@@ -1,0 +1,6 @@
+runtime: nodejs14
+
+handlers:
+  - url: /(.*)
+    static_files: build/\1
+    upload: build/(.*)

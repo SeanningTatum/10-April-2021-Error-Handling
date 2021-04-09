@@ -1,0 +1,44 @@
+name: appengine-staging
+on: [pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Format branch name
+        id: format_branch_name
+        uses: mad9000/actions-find-and-replace-string@2
+        with:
+          source: ${{ github.head_ref }}
+          find: "/"
+          replace: "-"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+
+      - name: yarn install
+        run: yarn install
+      
+      - name: yarn test 
+        run: yarn test 
+
+      - name: yarn build
+        run: yarn build
+
+      - name: Deploy to App Engine
+        id: deploy
+        uses: google-github-actions/deploy-appengine@v0.2.0
+        with:
+          deliverables: app.staging.yaml
+          credentials: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          version: ${{ steps.format_branch_name.outputs.value }}
+          project_id: ${{ secrets.GCP_PROJECT }}
+          promote: false
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}

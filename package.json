@@ -1,0 +1,81 @@
+{
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "NODE_ENV=production snowpack build",
+    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "generate": "plop",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build:test": "serve -s build"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "axios": "^0.21.1",
+    "emotion-theming": "^11.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@kensho-technologies/eslint-config": "^22.0.0",
+    "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-postcss": "^1.2.1",
+    "@snowpack/plugin-react-refresh": "^2.4.0",
+    "@snowpack/plugin-run-script": "^2.3.0",
+    "@snowpack/plugin-typescript": "^1.2.0",
+    "@snowpack/plugin-webpack": "^2.3.1",
+    "@snowpack/web-test-runner-plugin": "^0.2.0",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@testing-library/react": "^11.0.0",
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/snowpack-env": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "@web/test-runner": "^0.12.17",
+    "autoprefixer": "^9",
+    "babel-loader": "^8.2.2",
+    "chai": "^4.3.4",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^32.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "4.3.8",
+    "lint-staged": "^10.5.4",
+    "plop": "^2.7.4",
+    "postcss": "^7",
+    "prettier": "^2.0.5",
+    "snowpack": "^3.0.1",
+    "tailwind-styled-components": "^1.0.7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "typescript": "^4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": "eslint --fix",
+    "*.tsx": "eslint --fix",
+    "*.js": "eslint --fix"
+  }
+}

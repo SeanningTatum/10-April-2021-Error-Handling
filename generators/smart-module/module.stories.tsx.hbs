@@ -1,0 +1,17 @@
+import React from 'react';
+import type { Story, Meta } from '@storybook/react/types-6-0';
+
+import { {{pacalCase name}}, {{pacalCase name}}Props } from './{{pacalCase name}}';
+
+export default {
+  title: 'Module/{{pacalCase name}}',
+  component: {{pacalCase name}},
+} as Meta;
+
+const Template: Story<{{pacalCase name}}Props> = (args) => <{{pacalCase name}} {...args} />;
+
+export const Basic = Template.bind({});
+Basic.args = {
+  // Add props here
+};
+

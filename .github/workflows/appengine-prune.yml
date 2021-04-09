@@ -1,0 +1,23 @@
+name: appengine-prune
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Format branch name
+        id: format_branch_name
+        uses: mad9000/actions-find-and-replace-string@2
+        with:
+          source: ${{ github.head_ref }}
+          find: "/"
+          replace: "-"
+
+      - uses: actions-hub/gcloud@master
+        name: Delete
+        env:
+          APPLICATION_CREDENTIALS: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          PROJECT_ID: ${{ secrets.GCP_PROJECT }}
+        with:
+          args: app versions delete ${{ steps.format_branch_name.outputs.value }}

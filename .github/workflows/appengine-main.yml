@@ -1,0 +1,39 @@
+name: appengine-main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+
+      - name: yarn install
+        run: yarn install
+
+      - name: yarn test 
+        run: yarn test 
+
+      - name: yarn build
+        run: yarn build
+
+      - name: Deploy to App Engine
+        id: deploy
+        uses: google-github-actions/deploy-appengine@v0.2.0
+        with:
+          deliverables: app.yaml
+          credentials: ${{ secrets.GCLOUD_SERVICE_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT }}
+          version: main
+          promote: true
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
