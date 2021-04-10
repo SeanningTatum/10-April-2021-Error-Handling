@@ -1,11 +1,25 @@
-# New Project
+# 10-April-2021-Error-Handling
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
 
-# Todo
-- Add testing to plop, workflow and package.json
+> ✨ Bootstrapped with create-su-app. (create sean urgel app)
 
-## Available Scripts
+[Read the blog](https://seanurgel.dev/blog/better-error-handling-in-react-and-axios)
+[Slides](https://seanurgel.dev/blog/better-error-handling-in-react-and-axios)
+
+```
+├── routes
+│   ├── Home.test.tsx
+│   ├── Home.tsx <------ Demo App
+├── services
+│   └── Blog.ts <------ Api Calls
+├── store
+│   └── DialogStore.tsx <------- State Management
+├── types
+│   ├── Errors.ts <--------- Custom errors
+│   └── ValidationError.ts
+└── utils
+    └── axiosInstance.ts <-------- Custom axios instance
+```
 
 ### npm start
 
