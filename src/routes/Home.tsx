@@ -7,29 +7,42 @@ import { getBlogs } from '~/services/Blog';
 import { useDialogContext } from '~/store/DialogStore';
 import { AllErrors, ServerError, ValidationError } from '~/types/Errors';
 
-function Home(): JSX.Element {
+interface Props {
+  mocks?: {
+    errorType: AllErrors;
+  };
+}
+
+function Home(props: Props): JSX.Element {
   // MARK:- Store
   const { dispatch, state } = useDialogContext();
 
   // MARK:- State
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     async function fetchBlogs(): Promise<void> {
       try {
+        if (props.mocks?.errorType) {
+          throw props.mocks.errorType;
+        }
+
         const data = await getBlogs();
 
         setBlogs(data.body);
       } catch (error: AllErrors) {
         if (error instanceof ValidationError) {
-          dispatch({
-            type: 'show',
-            payload: {
-              message: error.displayFormattedError(),
-              type: 'ERROR',
-            },
-          });
+          // dispatch({
+          //   type: 'show',
+          //   payload: {
+          //     message: error.displayFormattedError(),
+          //     type: 'ERROR',
+          //   },
+          // });
+
+          setErrorMsg(error.displayFormattedError());
 
           return;
         }
@@ -58,6 +71,11 @@ function Home(): JSX.Element {
   return (
     <Center>
       <div>
+        {errorMsg && (
+          <h1 className="text-xl text-red-200 p-5 flex items-center bg-red-500 rounded-md mb-10">
+            {errorMsg}
+          </h1>
+        )}
         {blogs.length > 0 ? (
           blogs.map((blog) => (
             <BlogCard
