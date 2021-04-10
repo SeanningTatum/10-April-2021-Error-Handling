@@ -46,7 +46,7 @@ function Home(props: Props): JSX.Element {
         }
 
         if (error instanceof ServerError) {
-          // Redirect maybe
+          setErrorMsg('Server Error Occurred!');
         }
 
         // Errors that haven't been caught!
@@ -69,6 +69,11 @@ function Home(props: Props): JSX.Element {
   return (
     <Center>
       <div>
+        {errorMsg && (
+          <h1 className="p-5 rounded-md mb-10 text-xl bg-red-600 text-red-300">
+            {errorMsg}
+          </h1>
+        )}
         {blogs.length > 0 ? (
           blogs.map((blog) => (
             <BlogCard
