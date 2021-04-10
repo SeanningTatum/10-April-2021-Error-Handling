@@ -5,6 +5,7 @@ import Center from '~/components/Center';
 import type { Blog } from '~/models/Blog';
 import { getBlogs } from '~/services/Blog';
 import { useDialogContext } from '~/store/DialogStore';
+import { AllErrors, ServerError, ValidationError } from '~/types/Errors';
 
 function Home(): JSX.Element {
   // MARK:- Store
@@ -20,15 +21,24 @@ function Home(): JSX.Element {
         const data = await getBlogs();
 
         setBlogs(data.body);
-      } catch (error) {
-        dispatch({
-          type: 'show',
-          payload: {
-            message:
-              'Some bad mumjumbo has been happening recently! Go see a witchdoctor!',
-            type: 'ERROR',
-          },
-        });
+      } catch (error: AllErrors) {
+        if (error instanceof ValidationError) {
+          dispatch({
+            type: 'show',
+            payload: {
+              message: error.displayFormattedError(),
+              type: 'ERROR',
+            },
+          });
+
+          return;
+        }
+
+        if (error instanceof ServerError) {
+          // Redirect maybe
+        }
+
+        // Errors that haven't been caught!
       } finally {
         setLoading(false);
       }
