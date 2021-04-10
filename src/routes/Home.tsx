@@ -56,7 +56,7 @@ function Home(props: Props): JSX.Element {
     }
 
     fetchBlogs();
-  }, [dispatch]);
+  }, [dispatch, props.mocks?.errorType]);
 
   if (loading) {
     return (

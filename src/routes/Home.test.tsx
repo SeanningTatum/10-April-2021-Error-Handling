@@ -68,3 +68,23 @@ it('shows error message matching with the server error', async () => {
 
   expect(errorText.innerText).to.equal('Server Error Occurred!');
 });
+
+it('should render the blogs', async () => {
+  const { container } = render(
+    <DialogProvider>
+      <Layout>
+        <Home />
+      </Layout>
+    </DialogProvider>,
+  );
+
+  const successText = await screen.findByText(
+    'How to make errors in axios more readable and maintainable with a few lines of code!',
+  );
+
+  console.log(successText);
+
+  expect(successText.innerText).to.equal(
+    'How to make errors in axios more readable and maintainable with a few lines of code!',
+  );
+});
