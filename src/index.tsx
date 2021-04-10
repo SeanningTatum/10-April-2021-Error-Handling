@@ -4,6 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { DialogProvider } from './store/DialogStore';
 import { theme } from '~/config/theme';
 import App from '~/routes/index.routes';
 import './index.css';
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider theme={theme}>
-        <App />
+        <DialogProvider>
+          <App />
+        </DialogProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>,

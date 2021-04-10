@@ -3,12 +3,15 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home';
+import Layout from '~/components/Layout';
 
 function App(): JSX.Element {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
+    </Layout>
   );
 }
 
