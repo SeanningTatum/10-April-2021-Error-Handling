@@ -34,15 +34,13 @@ function Home(props: Props): JSX.Element {
         setBlogs(data.body);
       } catch (error: AllErrors) {
         if (error instanceof ValidationError) {
-          // dispatch({
-          //   type: 'show',
-          //   payload: {
-          //     message: error.displayFormattedError(),
-          //     type: 'ERROR',
-          //   },
-          // });
-
-          setErrorMsg(error.displayFormattedError());
+          dispatch({
+            type: 'show',
+            payload: {
+              message: error.displayFormattedError(),
+              type: 'ERROR',
+            },
+          });
 
           return;
         }
@@ -71,11 +69,6 @@ function Home(props: Props): JSX.Element {
   return (
     <Center>
       <div>
-        {errorMsg && (
-          <h1 className="text-xl text-red-200 p-5 flex items-center bg-red-500 rounded-md mb-10">
-            {errorMsg}
-          </h1>
-        )}
         {blogs.length > 0 ? (
           blogs.map((blog) => (
             <BlogCard
